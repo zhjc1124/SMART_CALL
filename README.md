@@ -285,7 +285,7 @@ arm语法有所区别，需要定义寄存器变量：
 ```
 <a name="lEfK0"></a>
 # 五、后记
-通过这次SMART_CALL的实现，清清楚楚地把汇编和函数调用过程的原理彻底搞懂了，以前看《深入理解计算机系统》第三章死活看不下去，这次倒是彻底弄明白了。<br />对协程原理比较理解的读者可能也能发现，这个功能其实和协程的实现比较类似。协程也是需要切换栈进行执行另一个函数，区别在于协程的切换需要完整地保存堆栈上下文，在执行完后在恢复上下文，而我们这里的栈切换是不需要这个操作的。<br />对协程感兴趣的可以去看一下[Boost.Context](https://github.com/boostorg/context)里jump和make函数的汇编实现，只有短短20多行的汇编实现了协程的功能，这个也是我们SMART_CALL最初版本调用的库，后面给去掉了。
+通过这次SMART_CALL的实现，清清楚楚地把汇编和函数调用过程的原理彻底搞懂了，以前看《深入理解计算机系统》第三章死活看不下去，这次倒是彻底弄明白了。<br />对协程原理比较理解的读者可能也能发现，这个功能其实和协程的实现比较类似。协程也是需要切换栈进行执行另一个函数，区别在于协程的切换需要完整地保存堆栈上下文，在执行完后再恢复上下文，而我们这里的栈切换是不需要这个操作的。<br />对协程感兴趣的可以去看一下[Boost.Context](https://github.com/boostorg/context)里jump和make函数的汇编实现，只有短短20多行的汇编实现了协程的功能，这个也是我们SMART_CALL最初版本调用的库，后面给去掉了。
 <a name="f2RMy"></a>
 # 参考
 1、[oceanbase/deps/oblib/src/common/ob_smart_call.h at master · oceanbase/oceanbase](https://github.com/oceanbase/oceanbase/blob/master/deps/oblib/src/common/ob_smart_call.h)<br />2、《深入理解计算机系统》第三章<br />3、[Guide to x86-64](https://web.stanford.edu/class/cs107/guide/x86-64.html)<br />4、[Optimize Options - Using the GNU Compiler Collection (GCC)](https://gcc.gnu.org/onlinedocs/gcc-4.7.2/gcc/Optimize-Options.html)<br />5、[GCC-Inline-Assembly-HOWTO](https://www.ibiblio.org/gferg/ldp/GCC-Inline-Assembly-HOWTO.html)<br />6、[Boost.Context](https://github.com/boostorg/context)
